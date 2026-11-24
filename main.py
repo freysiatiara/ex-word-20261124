@@ -32,6 +32,10 @@ def main() -> None:
     os.chmod(path, 0o644)
     if not os.path.isfile(path) or os.path.getsize(path) != len(WORD):
         raise RuntimeError("output entry.txt missing or wrong size")
+    with open(path, "r", encoding="utf-8", newline="") as f:
+        written = f.read()
+    if written != WORD:
+        raise RuntimeError("output entry.txt content does not match the entry word")
 
 
 if __name__ == "__main__":
